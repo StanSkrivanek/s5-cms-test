@@ -10,8 +10,6 @@ const client = createClient({
     // token: env.SANITY_TOKEN // Uncomment this line if you need to use a token for authentication
 });
 
-// export default client;
-
 export const getAllRecipes = async () => {
     const query = `*[_type == "recipe"]{
         _id,
@@ -32,6 +30,27 @@ export const getAllRecipes = async () => {
         }`;
     const recipes = await client.fetch(query);
     console.log('recipes', recipes);
+    return recipes;
+};
+export const getFeaturedRecipes = async () => {
+    const query = `*[_type == "recipe" && featured == true]{
+        _id,
+        title,
+        slug,
+        "image": mainImage.asset->url,
+        featured,
+        "cuisineInfo": cuisine->name,
+        "cuisineFlag": cuisine->flag{
+          asset->{
+            _id,
+            url
+          }
+        },
+        "mealTypeName": mealType->name,
+        prepTime,
+        cookTime
+    }`;
+    const recipes = await client.fetch(query);
     return recipes;
 };
 export const getAllMeals = async () => {

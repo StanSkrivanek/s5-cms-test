@@ -1,7 +1,7 @@
 <script>
-const { data } = $props();
-// $inspect('data', data); // Added logging for debugging purposes
-let loading = data.isLoading
+	const { data } = $props();
+	// $inspect('data', data); // Added logging for debugging purposes
+	let loading = data.isLoading;
 </script>
 
 <!-- render all recipes -->
@@ -17,14 +17,14 @@ let loading = data.isLoading
 
 	{#if loading}
 		<p>Loading recipes...</p>
-	<!-- {:else if error}
+		<!-- {:else if error}
 		<p class="error">Error: {error}</p>
 	{:else if recipes.length === 0}
 		<p>No recipes found. Start adding some in your Sanity Studio!</p> -->
 	{:else}
 		<div class="recipe-grid">
 			{#each data.recipes as recipe}
-      	<div class="recipe-card">
+				<div class="recipe-card">
 					{#if recipe.image}
 						<img src={recipe.image} alt={recipe.title} class="recipe-image" />
 					{:else}
@@ -62,8 +62,6 @@ let loading = data.isLoading
 		</div>
 	{/if}
 </div>
-
-
 
 <style>
 	.container {
@@ -143,6 +141,10 @@ let loading = data.isLoading
 
 	.meal-type {
 		margin-right: 0.75rem;
+		padding: 0.25rem 0.5rem;
+		background-color: #eaeaea;
+		border-radius: 0.25rem;
+		font-size: 0.75rem;
 	}
 
 	.cuisine-info {
@@ -152,8 +154,7 @@ let loading = data.isLoading
 
 	.flag-icon {
 		width: 1.25rem;
-		height: 1.25rem;
-		margin-right: 0.25rem;
+		margin-right: 0.5rem;
 		object-fit: cover;
 		border-radius: 0.125rem;
 	}
@@ -171,8 +172,8 @@ let loading = data.isLoading
 	.featured-badge span {
 		background-color: #fefcbf;
 		color: #975a16;
-		font-size: 0.75rem;
 		padding: 0.25rem 0.5rem;
+		font-size: 0.75rem;
 		border-radius: 0.25rem;
 	}
 </style>

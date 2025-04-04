@@ -1,4 +1,4 @@
-import { getAllRecipes } from '$lib/server/sanity';
+import { getAllRecipes } from '$lib/server/sanityClient';
 
 export async function load() {
 
