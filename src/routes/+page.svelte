@@ -1,6 +1,6 @@
 <script>
 	const { data } = $props();
-	$inspect('data', data); // Added logging for debugging purposes
+	// $inspect('data', data); // Added logging for debugging purposes
 	let loading = data.isLoading;
 </script>
 
@@ -158,7 +158,7 @@
 		color: #1c490b;
 		padding: 0.25rem 0.75rem;
 		font-size: 0.75rem;
-		border-radius: 0 0.25rem 0.25rem 0;
+		border-radius: 0.25rem;
 		box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 	}
 

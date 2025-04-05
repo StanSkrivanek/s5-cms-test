@@ -1,6 +1,6 @@
 <script>
 	const { data } = $props();
-	$inspect('Recipe data', data);
+	// $inspect('Recipe data', data);
 	let recipe = data.recipe;
 </script>
 
@@ -168,13 +168,13 @@
 	}
 
 	.featured-badge span {
-		background-color: #fefcbf;
-		color: #975a16;
+			background-color: #c4febf;
+		color: #1c490b;
 		padding: 0.5rem 1rem;
-		font-size: 0.875rem;
-		border-radius: 0 0.25rem 0.25rem 0;
+		font-size: 0.75rem;
+		border-radius: 0.25rem;
 		box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-		font-weight: 600;
+		font-weight: 400;
 	}
 
 	.recipe-times {
