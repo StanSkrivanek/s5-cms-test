@@ -1,5 +1,5 @@
 <script>
-  import Studio from '$lib/studio/Studio.svelte';
+	import Studio from '$lib/studio/Studio.svelte';
 </script>
 
 <Studio />
