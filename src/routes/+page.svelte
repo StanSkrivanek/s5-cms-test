@@ -1,55 +1,27 @@
 <script>
 	const { data } = $props();
-	// $inspect('data', data); // Added logging for debugging purposes
+	$inspect('data', data); // Added logging for debugging purposes
 	let loading = data.isLoading;
 </script>
 
 <!-- render all recipes -->
-
-<!-- {#each data.recipes as recipe}
-  <h1>{recipe.title}</h1>
-  <img src={recipe.image} alt={recipe.title} />
-  <p>{recipe.description}</p>
-{/each} -->
-
 <div class="container">
 	<h1>Our Recipes</h1>
 
 	{#if loading}
 		<p>Loading recipes...</p>
-		<!-- {:else if error}
-		<p class="error">Error: {error}</p>
-	{:else if recipes.length === 0}
-		<p>No recipes found. Start adding some in your Sanity Studio!</p> -->
 	{:else}
 		<div class="recipe-grid">
 			{#each data.recipes as recipe}
-				<div class="recipe-card">
-					{#if recipe.image}
-						<img src={recipe.image} alt={recipe.title} class="recipe-image" />
-					{:else}
-						<div class="no-image">
-							<span>No image</span>
-						</div>
-					{/if}
-
-					<div class="recipe-content">
-						<h2>{recipe.title}</h2>
-
-						<div class="recipe-meta">
-							<div class="cuisine-info">
-								{#if recipe.cuisineFlag && recipe.cuisineFlag.asset}
-									<img src={recipe.cuisineFlag.asset.url} alt="Flag" class="flag-icon" />
-								{/if}
-								{#if recipe.cuisineInfo}<span>{recipe.cuisineInfo}</span>{/if}
+				<a href="/{recipe.slug}" class="recipe-card">
+					<div class="image-container">
+						{#if recipe.image}
+							<img src={recipe.image} alt={recipe.title} class="recipe-image" />
+						{:else}
+							<div class="no-image">
+								<span>No image</span>
 							</div>
-							{#if recipe.mealTypeName}<span class="meal-type">{recipe.mealTypeName}</span>{/if}
-						</div>
-
-						<div class="recipe-time">
-							{#if recipe.prepTime}<div>Prep: {recipe.prepTime} min</div>{/if}
-							{#if recipe.cookTime}<div>Cook: {recipe.cookTime} min</div>{/if}
-						</div>
+						{/if}
 
 						{#if recipe.featured}
 							<div class="featured-badge">
@@ -57,7 +29,26 @@
 							</div>
 						{/if}
 					</div>
-				</div>
+
+					<div class="recipe-content">
+						<h2>{recipe.title}</h2>
+
+						<div class="recipe-meta">
+							<div class="cuisine">
+								{#if recipe.cuisineFlag && recipe.cuisineFlag.asset}
+									<img src={recipe.cuisineFlag.asset.url} alt="" class="flag-icon" />
+								{/if}
+								{#if recipe.cuisineInfo}<span>{recipe.cuisineInfo}</span>{/if}
+							</div>
+							{#if recipe.mealTypeName}<span class="meal-type">{recipe.mealTypeName}</span>{/if}
+						</div>
+
+						<div class="recipe-times">
+							{#if recipe.prepTime}<div>Prep: {recipe.prepTime} min</div>{/if}
+							{#if recipe.cookTime}<div>Cook: {recipe.cookTime} min</div>{/if}
+						</div>
+					</div>
+				</a>
 			{/each}
 		</div>
 	{/if}
@@ -67,35 +58,20 @@
 	.container {
 		max-width: 1200px;
 		margin: 0 auto;
-		padding: 1rem;
+		padding: 2rem 1rem;
 	}
 
 	h1 {
-		font-size: 1.875rem;
-		font-weight: bold;
-		margin-bottom: 1.5rem;
+		font-size: 2.5rem;
+		font-weight: 700;
+		margin-bottom: 2rem;
+		text-align: center;
 	}
-
-	/* .error {
-		color: #e53e3e;
-	} */
 
 	.recipe-grid {
 		display: grid;
-		grid-template-columns: 1fr;
-		gap: 1.5rem;
-	}
-
-	@media (min-width: 768px) {
-		.recipe-grid {
-			grid-template-columns: 1fr 1fr;
-		}
-	}
-
-	@media (min-width: 1024px) {
-		.recipe-grid {
-			grid-template-columns: 1fr 1fr 1fr;
-		}
+		grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+		gap: 1rem;
 	}
 
 	.recipe-card {
@@ -103,17 +79,32 @@
 		border-radius: 0.5rem;
 		overflow: hidden;
 		box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+		transition:
+			transform 0.2s,
+			box-shadow 0.2s;
+		text-decoration: none;
+		color: inherit;
+	}
+
+	.recipe-card:hover {
+		transform: translateY(-4px);
+		box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+	}
+
+	.image-container {
+		position: relative;
+		width: 100%;
 	}
 
 	.recipe-image {
 		width: 100%;
-		height: 12rem;
+		height: 200px;
 		object-fit: cover;
 	}
 
 	.no-image {
 		width: 100%;
-		height: 12rem;
+		height: 200px;
 		background-color: #edf2f7;
 		display: flex;
 		align-items: center;
@@ -134,46 +125,54 @@
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
-		font-size: 0.875rem;
-		color: #4a5568;
 		margin-bottom: 0.5rem;
 	}
 
-	.meal-type {
-		margin-right: 0.75rem;
-		padding: 0.25rem 0.5rem;
-		background-color: #eaeaea;
-		border-radius: 0.25rem;
-		font-size: 0.75rem;
-	}
-
-	.cuisine-info {
+	.cuisine {
 		display: flex;
 		align-items: center;
+		gap: 0.5rem;
 	}
 
 	.flag-icon {
-		width: 1.25rem;
-		margin-right: 0.5rem;
-		object-fit: cover;
+		width: 1.5rem;
 		border-radius: 0.125rem;
 	}
 
-	.recipe-time {
-		display: block;
-		font-size: 0.875rem;
-		margin-bottom: 0.5rem;
+	.meal-type {
+		padding: 0.25rem 0.5rem;
+		background-color: #c8e6fa;
+		border-radius: 0.25rem;
+		font-size: 0.75rem;
 	}
 
 	.featured-badge {
-		margin-top: 0.5rem;
+		position: absolute;
+		top: 12px;
+		left: 12px;
+		z-index: 1;
 	}
 
 	.featured-badge span {
-		background-color: #fefcbf;
-		color: #975a16;
-		padding: 0.25rem 0.5rem;
+		background-color: #c4febf;
+		color: #1c490b;
+		padding: 0.25rem 0.75rem;
 		font-size: 0.75rem;
-		border-radius: 0.25rem;
+		border-radius: 0 0.25rem 0.25rem 0;
+		box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+	}
+
+	.recipe-times {
+		display: flex;
+		gap: 1rem;
+		margin-top: 0.5rem;
+		font-size: 0.875rem;
+		color: #4a5568;
+	}
+
+	@media (max-width: 640px) {
+		.recipe-grid {
+			grid-template-columns: 1fr;
+		}
 	}
 </style>
