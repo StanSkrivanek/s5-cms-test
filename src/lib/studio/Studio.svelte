@@ -1,23 +1,31 @@
 <script lang="ts">
-	import { renderStudio } from 'sanity';
 	import { onMount } from 'svelte';
-	import config from './sanity.config';
-
+	// import config from './sanity.config';
+	
 	/**
 	 * @type {HTMLDivElement}
 	 */
 	let studioRoot: HTMLDivElement;
+	//  let Studio: any;
 
 	onMount(() => {
-		if (studioRoot) {
-			// Use renderStudio instead of React's createRoot
-			const cleanupFn = renderStudio(studioRoot, config);
+		// Dynamically import to avoid SSR issues
+		let cleanupFunction: (() => void) | undefined;
+		
+		Promise.all([
+			import('sanity'),
+			import('./sanity.config')
+		]).then(([{ renderStudio }, { default: config }]) => {
+			if (studioRoot) {
+				// Use renderStudio instead of React's createRoot
+				cleanupFunction = renderStudio(studioRoot, config);
+			}
+		});
 
-			// Return cleanup function for when component is destroyed
-			return () => {
-				cleanupFn();
-			};
-		}
+		// Return cleanup function for when component is destroyed
+		return () => {
+			if (cleanupFunction) cleanupFunction();
+		};
 	});
 </script>
 
