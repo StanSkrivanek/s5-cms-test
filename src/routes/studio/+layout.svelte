@@ -6,5 +6,7 @@ let { children } = $props();
 </script>
 
 <Studio />
+ <!-- only to avoid the server error that `@render` is not found -->
+  <!-- children?.() -> optional only if children exists -->
 
 {@render children?.()}
