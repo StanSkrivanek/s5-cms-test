@@ -6,8 +6,8 @@ const client = createClient({
 	projectId: env.VITE_PUBLIC_SANITY_PROJECT_ID,
 	dataset: env.VITE_PUBLIC_SANITY_DATASET || 'production',
 	apiVersion: env.VITE_PUBLIC_SANITY_API_VERSION || '2023-05-03',
+	token: env.SANITY_API_TOKEN, // use a token for authentication
 	useCdn: true // `true` for faster, cached responses
-	// token: env.SANITY_TOKEN // Uncomment this line if you need to use a token for authentication
 });
 
 export const getAllRecipes = async () => {

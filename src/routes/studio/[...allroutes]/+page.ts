@@ -1,8 +1,7 @@
 // Disable SSR for all Studio routes
-export const ssr = false;
+export const ssr = false; // Disable SSR
 
-export function load({ params }) {
-	// You can use params.allroutes if needed
+export function load({ params }: { params: { allroutes: string } }) {
 	return {
 		path: params.allroutes
 	};
