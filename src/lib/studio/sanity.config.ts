@@ -2,24 +2,29 @@ import { schemaTypes } from '$lib/studio/schemaTypes';
 import { visionTool } from '@sanity/vision';
 import { defineConfig } from 'sanity';
 import { structureTool } from 'sanity/structure';
+import { env } from '$env/dynamic/private';
 
 export default defineConfig({
-	projectId: '45tneue6',
-	dataset: 'production',
+	projectId: env.VITE_PUBLIC_SANITY_PROJECT_ID,
+	dataset: env.VITE_PUBLIC_SANITY_DATASET,
 	basePath: '/studio',
+
 	unstable_noAuthBoundary: true,
-	apiVersion: '2025-04-11',
+	apiVersion: env.VITE_PUBLIC_SANITY_API_VERSION,
 	title: 'Yummy recipes',
+
 	plugins: [
 		structureTool(),
 		visionTool({
-			defaultApiVersion: '2025-04-11',
-			defaultDataset: 'production'
+			defaultApiVersion: env.VITE_PUBLIC_SANITY_API_VERSION,
+			defaultDataset: env.VITE_PUBLIC_SANITY_DATASET
 		})
 	],
+
 	schema: {
 		types: schemaTypes
 	},
+
 	websocketOptions: {
 		apiVersion: '2025-04-11', // Explicitly set for WebSockets
 		// Add reconnection options to help with initial connection issues
@@ -29,5 +34,6 @@ export default defineConfig({
 			maxAttempts: 5
 		}
 	},
+
 	description: 'A Sanity Studio for Yummy Recipes'
 });
