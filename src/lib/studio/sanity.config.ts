@@ -21,7 +21,7 @@ export default defineConfig({
 		types: schemaTypes
 	},
 	websocketOptions: {
-		// apiVersion: '2023-05-03', // Explicitly set for WebSockets
+		apiVersion: '2025-04-11', // Explicitly set for WebSockets
 		// Add reconnection options to help with initial connection issues
 		reconnect: {
 			initialDelay: 100,
