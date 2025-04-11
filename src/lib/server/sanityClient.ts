@@ -3,9 +3,9 @@ import { env } from '$env/dynamic/private';
 import { createClient } from '@sanity/client';
 
 const client = createClient({
-	projectId: env.VITE_PUBLIC_SANITY_PROJECT_ID,
-	dataset: env.VITE_PUBLIC_SANITY_DATASET || 'production',
-	apiVersion: env.VITE_PUBLIC_SANITY_API_VERSION || '2023-05-03',
+	projectId: '45tneue6',
+	dataset: 'production',
+	// apiVersion: '2025-02-19',
 	token: env.SANITY_API_TOKEN, // use a token for authentication
 	useCdn: true // `true` for faster, cached responses
 });
