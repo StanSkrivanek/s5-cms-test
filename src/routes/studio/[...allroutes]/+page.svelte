@@ -1,6 +1,1 @@
-<!-- <script lang="ts">
-   import { onMount } from 'svelte'
-  import Studio from '$lib/studio/Studio.svelte';
-</script>
-
-<Studio /> -->
+<!-- we can delete this file -->

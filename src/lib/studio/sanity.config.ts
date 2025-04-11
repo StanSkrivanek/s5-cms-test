@@ -2,22 +2,22 @@ import { schemaTypes } from '$lib/studio/schemaTypes';
 import { visionTool } from '@sanity/vision';
 import { defineConfig } from 'sanity';
 import { structureTool } from 'sanity/structure';
-import { env } from '$env/dynamic/private';
+
 
 export default defineConfig({
-	projectId: env.VITE_PUBLIC_SANITY_PROJECT_ID,
-	dataset: env.VITE_PUBLIC_SANITY_DATASET,
+	projectId: '45tneue6',
+	dataset: 'production',
 	basePath: '/studio',
 
 	unstable_noAuthBoundary: true,
-	apiVersion: env.VITE_PUBLIC_SANITY_API_VERSION,
+	apiVersion: '2023-10-01',
 	title: 'Yummy recipes',
 
 	plugins: [
 		structureTool(),
 		visionTool({
-			defaultApiVersion: env.VITE_PUBLIC_SANITY_API_VERSION,
-			defaultDataset: env.VITE_PUBLIC_SANITY_DATASET
+			defaultApiVersion: '2023-10-01',
+			defaultDataset: 'production'
 		})
 	],
 
