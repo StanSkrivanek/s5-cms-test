@@ -10,13 +10,13 @@ export default defineConfig({
 	basePath: '/studio',
 
 	unstable_noAuthBoundary: true,
-	apiVersion: '2023-10-01',
+	apiVersion: '2025-04-11',
 	title: 'Yummy recipes',
 
 	plugins: [
 		structureTool(),
 		visionTool({
-			defaultApiVersion: '2023-10-01',
+			defaultApiVersion: '2025-04-11',
 			defaultDataset: 'production'
 		})
 	],
